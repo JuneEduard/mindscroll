@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
 import '../models/questions.dart';
+import '../theme/mindscroll_theme.dart';
 
 /// Study set tile shared by the dashboard and the folder detail screen.
 class StudySetCard extends StatelessWidget {
@@ -15,11 +15,14 @@ class StudySetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final isAi = studySet.source == StudySetSource.pdfAi;
+
     return Container(
       constraints: const BoxConstraints(minHeight: 132),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: colors.surfaceContainer,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -44,17 +47,19 @@ class StudySetCard extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: studySet.source == StudySetSource.pdfAi
-                        ? const Color(0xFF342447)
-                        : const Color(0xFF35353D),
+                    // AI badge: primaryContainer/onPrimaryContainer;
+                    // manual badge: surfaceContainerHigh/onSurfaceVariant.
+                    color: isAi
+                        ? colors.primaryContainer
+                        : colors.surfaceContainerHigh,
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Text(
                     studySet.source.label,
                     style: inter(
-                      color: studySet.source == StudySetSource.pdfAi
-                          ? AppColors.accent
-                          : AppColors.secondaryText,
+                      color: isAi
+                          ? colors.onPrimaryContainer
+                          : colors.onSurfaceVariant,
                       fontSize: 11,
                       height: 14 / 11,
                       fontWeight: FontWeight.w500,
@@ -65,7 +70,7 @@ class StudySetCard extends StatelessWidget {
                 Text(
                   '${studySet.questions.length} Questions',
                   style: inter(
-                    color: AppColors.secondaryText,
+                    color: colors.onSurfaceVariant,
                     fontSize: 12,
                     height: 1.5,
                     fontWeight: FontWeight.w400,
@@ -75,7 +80,7 @@ class StudySetCard extends StatelessWidget {
                 Text(
                   studySet.lastReviewed,
                   style: inter(
-                    color: AppColors.secondaryText,
+                    color: colors.onSurfaceVariant,
                     fontSize: 11,
                     height: 14 / 11,
                     fontWeight: FontWeight.w400,
@@ -88,14 +93,11 @@ class StudySetCard extends StatelessWidget {
           SizedBox(
             width: 78,
             height: 36,
+            // primary/onPrimary from the ColorScheme (onPrimary text).
             child: FilledButton(
               onPressed: onStart,
               style: FilledButton.styleFrom(
-                backgroundColor: AppColors.primary,
                 padding: EdgeInsets.zero,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
               ),
               child: Text(
                 '▶ Start',

@@ -323,7 +323,14 @@ class _ExplanationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+      // 16px visual margin + whatever the system nav bar needs, so the
+      // card never slides under the gesture bar (Android 15 edge-to-edge).
+      margin: EdgeInsets.fromLTRB(
+        16,
+        0,
+        16,
+        16 + MediaQuery.paddingOf(context).bottom,
+      ),
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         color: const Color(0xFF23232B),

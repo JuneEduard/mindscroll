@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
 import '../models/questions.dart';
+import '../theme/mindscroll_theme.dart';
 import 'create_sheet.dart';
 import 'reel_quiz_feed.dart';
 import 'study_set_card.dart';
@@ -83,8 +83,8 @@ class _FolderDetailScreenState extends State<FolderDetailScreen> {
       // opens for the create sheet.
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
-        surfaceTintColor: Colors.transparent,
+        // Colors come from the theme's appBarTheme
+        // (surfaceContainerLowest / onSurface, no surface tint).
         leading: IconButton(
           tooltip: 'Back',
           onPressed: () => Navigator.pop(context),
@@ -114,7 +114,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: Theme.of(context).colorScheme.surfaceContainer,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Column(
@@ -125,7 +125,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen> {
                     height: 44,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF342447),
+                      color: Theme.of(context).colorScheme.primaryContainer,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Text('📁', style: TextStyle(fontSize: 22)),
@@ -174,10 +174,10 @@ class _FolderDetailScreenState extends State<FolderDetailScreen> {
                     ),
                   ),
                 ),
+                // primary foreground comes from the theme's textButtonTheme.
                 TextButton(
                   onPressed: _createStudySet,
                   style: TextButton.styleFrom(
-                    foregroundColor: AppColors.accent,
                     minimumSize: Size.zero,
                     padding: EdgeInsets.zero,
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -226,7 +226,7 @@ class _FolderMetric extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -243,7 +243,7 @@ class _FolderMetric extends StatelessWidget {
           Text(
             label,
             style: inter(
-              color: AppColors.secondaryText,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontSize: 11,
               fontWeight: FontWeight.w500,
             ),
@@ -264,14 +264,14 @@ class _EmptyFolderState extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 36),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         children: [
-          const Icon(
+          Icon(
             Icons.menu_book_outlined,
-            color: AppColors.accent,
+            color: Theme.of(context).colorScheme.primary,
             size: 32,
           ),
           const SizedBox(height: 12),
@@ -287,17 +287,15 @@ class _EmptyFolderState extends StatelessWidget {
             'Create your first set to start studying this folder.',
             textAlign: TextAlign.center,
             style: inter(
-              color: AppColors.secondaryText,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontSize: 12,
               height: 1.5,
             ),
           ),
           const SizedBox(height: 18),
+          // primary/onPrimary from the ColorScheme.
           FilledButton(
             onPressed: onCreatePressed,
-            style: FilledButton.styleFrom(
-              backgroundColor: AppColors.primary,
-            ),
             child: const Text('Create Study Set'),
           ),
         ],

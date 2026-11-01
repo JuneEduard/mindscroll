@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../controllers/quiz_controller.dart';
-import '../main.dart';
 import '../models/questions.dart';
+import '../theme/mindscroll_theme.dart';
 import 'create_sheet.dart';
 import 'folder_detail.dart';
 import 'reel_quiz_feed.dart';
@@ -220,17 +220,20 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             Material(
-              color: const Color(0xFF352319),
+              // Streak stays warm and distinct from the violet theme —
+              // colors live in the MindScrollColors ThemeExtension.
+              color: mindScrollColors(context).streakContainer,
               borderRadius: BorderRadius.circular(16),
               child: InkWell(
                 borderRadius: BorderRadius.circular(16),
                 onTap: () => _showMessage('Keep it going — day 6 is next!'),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   child: Text(
                     '🔥 5 Day Streak',
-                    style: TextStyle(
-                      color: Color(0xFFFF6D00),
+                    style: inter(
+                      color: mindScrollColors(context).onStreakContainer,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       height: 1,
@@ -285,10 +288,10 @@ class _SectionHeader extends StatelessWidget {
             ),
           ),
         ),
+        // primary foreground comes from the theme's textButtonTheme.
         TextButton(
           onPressed: onActionPressed,
           style: TextButton.styleFrom(
-            foregroundColor: AppColors.accent,
             minimumSize: Size.zero,
             padding: EdgeInsets.zero,
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -324,7 +327,7 @@ class _FolderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.surface,
+      color: Theme.of(context).colorScheme.surfaceContainer,
       borderRadius: BorderRadius.circular(12),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -348,7 +351,7 @@ class _FolderCard extends StatelessWidget {
               Text(
                 details,
                 style: inter(
-                  color: AppColors.secondaryText,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                   fontSize: 12,
                   height: 1.5,
                   fontWeight: FontWeight.w400,
@@ -390,9 +393,11 @@ class _BottomNavigation extends StatelessWidget {
       top: false,
       child: Container(
         height: 64,
-        decoration: const BoxDecoration(
-          color: AppColors.navigation,
-          border: Border(top: BorderSide(color: AppColors.divider)),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surfaceContainerLow,
+          border: Border(
+            top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
+          ),
         ),
         child: Row(
           children: [
@@ -427,7 +432,8 @@ class _NavigationAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = selected ? AppColors.accent : AppColors.secondaryText;
+    final colors = Theme.of(context).colorScheme;
+    final color = selected ? colors.primary : colors.onSurfaceVariant;
 
     return Semantics(
       selected: selected,
