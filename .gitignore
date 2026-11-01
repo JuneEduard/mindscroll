@@ -46,3 +46,6 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Figma Make exports (design snapshots, not app source)
+/Figma/
