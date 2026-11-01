@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'views/dashboard.dart';
 
 void main() {
@@ -18,14 +17,34 @@ class AppColors {
   static const fieldBorder = Color(0xFF4A4A55);
 }
 
+/// Inter text style — the font is bundled in fonts/, so this never
+/// touches the network (unlike package:google_fonts, which fetched font
+/// files lazily at runtime and caused UI jank).
+TextStyle inter({
+  double? fontSize,
+  double? height,
+  FontWeight? fontWeight,
+  Color? color,
+  TextDecoration? decoration,
+}) =>
+    TextStyle(
+      fontFamily: 'Inter',
+      fontSize: fontSize,
+      height: height,
+      fontWeight: fontWeight,
+      color: color,
+      decoration: decoration,
+    );
+
 class MindScroll extends StatelessWidget {
   const MindScroll({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = GoogleFonts.interTextTheme(
-      ThemeData.dark(useMaterial3: true).textTheme,
-    );
+    final textTheme = ThemeData.dark(useMaterial3: true).textTheme.apply(
+          fontFamily: 'Inter',
+          fontFamilyFallback: const ['Roboto'],
+        );
 
     return MaterialApp(
       title: 'MindScroll',

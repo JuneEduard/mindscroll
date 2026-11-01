@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mindscroll/controllers/quiz_controller.dart';
 import 'package:mindscroll/main.dart';
+import 'package:mindscroll/views/reel_quiz_feed.dart';
 
 void main() {
   testWidgets('Dashboard renders per Figma design', (WidgetTester tester) async {
@@ -64,5 +66,35 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('📁 MATH1013 Calculus'), findsOneWidget);
+  });
+
+  // Regression: AnimatedPositioned used to be wrapped in IgnorePointer,
+// violating Positioned-must-be-direct-Stack-child. That threw a
+// ParentDataWidget exception on every layout pass (grey screen in
+// profile/release builds, severe jank while swiping).
+testWidgets('Reel feed lays out without exceptions and answers correctly',
+    (WidgetTester tester) async {
+  await tester.pumpWidget(MaterialApp(
+    home: ReelQuizFeed(studySet: QuizController.mockStudySets[0]),
+  ));
+  await tester.pump();
+
+  expect(tester.takeException(), isNull);
+  expect(find.text('Which widget cannot change its configuration once it is built?'),
+      findsOneWidget);
+
+  // Tap the correct option (StatelessWidget) — locks, reveals explanation.
+  await tester.tap(find.text('StatelessWidget'));
+  await tester.pump();
+  expect(tester.takeException(), isNull);
+  expect(find.text('Correct!'), findsOneWidget);
+
+  // Swipe to next card → state resets (explanation hidden again).
+  await tester.fling(find.byType(PageView), const Offset(0, -400), 800);
+  await tester.pumpAndSettle();
+  expect(tester.takeException(), isNull);
+  expect(find.text('Correct!'), findsNothing);
+    expect(find.text('Which programming language is Flutter primarily written in?'),
+        findsOneWidget);
   });
 }

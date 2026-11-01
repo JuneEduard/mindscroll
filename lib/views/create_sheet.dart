@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../main.dart';
 
 /// Modal bottom sheet for creating a folder or study set.
@@ -59,7 +58,7 @@ class _CreateSheetState extends State<CreateSheet> {
                 Expanded(
                   child: Text(
                     widget.isFolder ? 'New Folder' : 'Create Study Set',
-                    style: GoogleFonts.inter(
+                    style: inter(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
                     ),
@@ -75,7 +74,7 @@ class _CreateSheetState extends State<CreateSheet> {
             const SizedBox(height: 12),
             Text(
               'Title',
-              style: GoogleFonts.inter(
+              style: inter(
                 color: AppColors.secondaryText,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
@@ -93,7 +92,7 @@ class _CreateSheetState extends State<CreateSheet> {
                 hintText: widget.isFolder
                     ? 'e.g. COMP4521 Mobile Dev'
                     : 'e.g. Lecture 6',
-                hintStyle: GoogleFonts.inter(
+                hintStyle: inter(
                   color: AppColors.secondaryText,
                   fontSize: 14,
                 ),

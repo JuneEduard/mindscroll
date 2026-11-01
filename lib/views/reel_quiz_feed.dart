@@ -159,13 +159,17 @@ class _QuizCard extends StatelessWidget {
               ),
             ),
             // ---- Sliding explanation overlay ----
-            IgnorePointer(
-              child: AnimatedPositioned(
-                duration: const Duration(milliseconds: 320),
-                curve: Curves.easeOutCubic,
-                left: 0,
-                right: 0,
-                bottom: answered ? 0 : -280,
+            // AnimatedPositioned (a Positioned) must be a DIRECT child of
+            // the Stack — IgnorePointer goes inside it. Reversing this
+            // caused a ParentDataWidget exception every layout pass
+            // (grey screen in profile mode, jank while swiping).
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 320),
+              curve: Curves.easeOutCubic,
+              left: 0,
+              right: 0,
+              bottom: answered ? 0 : -280,
+              child: IgnorePointer(
                 child: _ExplanationCard(
                   question: question,
                   wasCorrect: selected == question.correctIndex,

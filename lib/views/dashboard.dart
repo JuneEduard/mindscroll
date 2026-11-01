@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../controllers/quiz_controller.dart';
 import '../main.dart';
 import '../models/questions.dart';
@@ -105,6 +104,11 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // The create sheet lifts itself above the keyboard via its own
+      // viewInsets padding. Resizing the body here would relayout the whole
+      // dashboard (shrinkWrap grids + slivers) on EVERY keyboard animation
+      // frame — that was the lag when creating folders/sets.
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         bottom: false,
         child: CustomScrollView(
@@ -208,7 +212,7 @@ class _DashboardState extends State<Dashboard> {
             Expanded(
               child: Text(
                 'MindScroll',
-                style: GoogleFonts.inter(
+                style: inter(
                   fontSize: 22,
                   height: 1.2,
                   fontWeight: FontWeight.w700,
@@ -274,7 +278,7 @@ class _SectionHeader extends StatelessWidget {
         Expanded(
           child: Text(
             title,
-            style: GoogleFonts.inter(
+            style: inter(
               fontSize: 16,
               height: 22 / 16,
               fontWeight: FontWeight.w700,
@@ -291,7 +295,7 @@ class _SectionHeader extends StatelessWidget {
           ),
           child: Text(
             action,
-            style: GoogleFonts.inter(
+            style: inter(
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
@@ -334,7 +338,7 @@ class _FolderCard extends StatelessWidget {
                 '📁 $title',
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.inter(
+                style: inter(
                   fontSize: 14,
                   height: 1.5,
                   fontWeight: FontWeight.w600,
@@ -343,7 +347,7 @@ class _FolderCard extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 details,
-                style: GoogleFonts.inter(
+                style: inter(
                   color: AppColors.secondaryText,
                   fontSize: 12,
                   height: 1.5,
@@ -443,7 +447,7 @@ class _NavigationAction extends StatelessWidget {
             const SizedBox(height: 5),
             Text(
               label,
-              style: GoogleFonts.inter(
+              style: inter(
                 color: color,
                 fontSize: 11,
                 fontWeight: selected ? FontWeight.w600 : FontWeight.w500,

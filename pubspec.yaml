@@ -35,8 +35,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
-  # UI-only packages from the Figma Make export (no state management).
-  google_fonts: ^6.2.1
+  # UI-only package from the Figma Make export (no state management).
+  # Inter is bundled locally (fonts/) instead of google_fonts to avoid
+  # runtime network fetches that caused UI jank.
   flutter_svg: ^2.0.17
 
 dev_dependencies:
@@ -71,22 +72,15 @@ flutter:
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package
 
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/to/font-from-package
+  # Inter is bundled locally (SIL Open Font License, see fonts/OFL.txt).
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: fonts/Inter-400.otf
+          weight: 400
+        - asset: fonts/Inter-500.otf
+          weight: 500
+        - asset: fonts/Inter-600.otf
+          weight: 600
+        - asset: fonts/Inter-700.otf
+          weight: 700

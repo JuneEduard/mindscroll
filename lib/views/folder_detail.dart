@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../main.dart';
 import '../models/questions.dart';
 import 'create_sheet.dart';
@@ -80,6 +79,9 @@ class _FolderDetailScreenState extends State<FolderDetailScreen> {
     final sets = _sets;
 
     return Scaffold(
+      // See dashboard.dart — avoid per-frame relayout when the keyboard
+      // opens for the create sheet.
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: AppColors.background,
         surfaceTintColor: Colors.transparent,
@@ -90,7 +92,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen> {
         ),
         title: Text(
           'Folder',
-          style: GoogleFonts.inter(
+          style: inter(
             fontSize: 18,
             fontWeight: FontWeight.w700,
           ),
@@ -131,7 +133,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen> {
                   const SizedBox(height: 16),
                   Text(
                     widget.folder.name,
-                    style: GoogleFonts.inter(
+                    style: inter(
                       fontSize: 22,
                       height: 1.25,
                       fontWeight: FontWeight.w700,
@@ -165,7 +167,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen> {
                 Expanded(
                   child: Text(
                     'Study Sets',
-                    style: GoogleFonts.inter(
+                    style: inter(
                       fontSize: 16,
                       height: 22 / 16,
                       fontWeight: FontWeight.w700,
@@ -182,7 +184,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen> {
                   ),
                   child: Text(
                     '+ Create Study Set',
-                    style: GoogleFonts.inter(
+                    style: inter(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
@@ -232,7 +234,7 @@ class _FolderMetric extends StatelessWidget {
         children: [
           Text(
             value,
-            style: GoogleFonts.inter(
+            style: inter(
               fontSize: 18,
               fontWeight: FontWeight.w700,
             ),
@@ -240,7 +242,7 @@ class _FolderMetric extends StatelessWidget {
           const SizedBox(height: 3),
           Text(
             label,
-            style: GoogleFonts.inter(
+            style: inter(
               color: AppColors.secondaryText,
               fontSize: 11,
               fontWeight: FontWeight.w500,
@@ -275,7 +277,7 @@ class _EmptyFolderState extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             'No study sets yet',
-            style: GoogleFonts.inter(
+            style: inter(
               fontSize: 15,
               fontWeight: FontWeight.w700,
             ),
@@ -284,7 +286,7 @@ class _EmptyFolderState extends StatelessWidget {
           Text(
             'Create your first set to start studying this folder.',
             textAlign: TextAlign.center,
-            style: GoogleFonts.inter(
+            style: inter(
               color: AppColors.secondaryText,
               fontSize: 12,
               height: 1.5,

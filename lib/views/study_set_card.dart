@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../main.dart';
 import '../models/questions.dart';
 
@@ -32,7 +31,7 @@ class StudySetCard extends StatelessWidget {
               children: [
                 Text(
                   studySet.title,
-                  style: GoogleFonts.inter(
+                  style: inter(
                     fontSize: 14,
                     height: 20 / 14,
                     fontWeight: FontWeight.w700,
@@ -52,7 +51,7 @@ class StudySetCard extends StatelessWidget {
                   ),
                   child: Text(
                     studySet.source.label,
-                    style: GoogleFonts.inter(
+                    style: inter(
                       color: studySet.source == StudySetSource.pdfAi
                           ? AppColors.accent
                           : AppColors.secondaryText,
@@ -65,7 +64,7 @@ class StudySetCard extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   '${studySet.questions.length} Questions',
-                  style: GoogleFonts.inter(
+                  style: inter(
                     color: AppColors.secondaryText,
                     fontSize: 12,
                     height: 1.5,
@@ -75,7 +74,7 @@ class StudySetCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   studySet.lastReviewed,
-                  style: GoogleFonts.inter(
+                  style: inter(
                     color: AppColors.secondaryText,
                     fontSize: 11,
                     height: 14 / 11,
@@ -100,7 +99,7 @@ class StudySetCard extends StatelessWidget {
               ),
               child: Text(
                 '▶ Start',
-                style: GoogleFonts.inter(
+                style: inter(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),
