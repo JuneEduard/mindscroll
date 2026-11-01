@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../controllers/quiz_controller.dart';
 import '../models/questions.dart';
 
@@ -41,7 +42,6 @@ class _ReelQuizFeedState extends State<ReelQuizFeed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF121212),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: IconButton(
@@ -60,10 +60,8 @@ class _ReelQuizFeedState extends State<ReelQuizFeed> {
         // Reset answer state for every freshly-snapped card.
         onPageChanged: _controller.onPageChanged,
         itemCount: _controller.questionCount,
-        itemBuilder: (context, index) => _QuizCard(
-          controller: _controller,
-          pageIndex: index,
-        ),
+        itemBuilder: (context, index) =>
+            _QuizCard(controller: _controller, pageIndex: index),
       ),
     );
   }
@@ -101,6 +99,7 @@ class _QuizCard extends StatelessWidget {
       builder: (context, _) {
         final answered = controller.answered;
         final selected = controller.selectedAnswer;
+        final colors = Theme.of(context).colorScheme;
 
         return Stack(
           children: [
@@ -132,8 +131,8 @@ class _QuizCard extends StatelessWidget {
                       final isCorrect = i == question.correctIndex;
                       final isPicked = selected == i;
 
-                      Color bg = const Color(0xFF1E1E24);
-                      Color border = const Color(0xFF2E2E38);
+                      Color bg = colors.surfaceContainer;
+                      Color border = colors.outlineVariant;
                       if (answered && isCorrect) {
                         bg = _correctBg;
                         border = _correctBorder;
@@ -191,6 +190,7 @@ class _ProgressHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Row(
       children: [
         Expanded(
@@ -199,16 +199,16 @@ class _ProgressHeader extends StatelessWidget {
             child: LinearProgressIndicator(
               value: current / total,
               minHeight: 4,
-              backgroundColor: const Color(0xFF2A2A33),
-              valueColor:
-                  const AlwaysStoppedAnimation(Color(0xFF4CAF50)),
+              backgroundColor: colors.surfaceContainerHighest,
+              // Pedagogical green — matches the correct-answer accent.
+              valueColor: const AlwaysStoppedAnimation(Color(0xFF4CAF50)),
             ),
           ),
         ),
         const SizedBox(width: 12),
         Text(
           '$current / $total',
-          style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
+          style: TextStyle(color: colors.onSurfaceVariant, fontSize: 13),
         ),
       ],
     );
@@ -222,17 +222,19 @@ class _CategoryChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: const Color(0xFF2A2A33),
+          color: colors.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
           label,
           style: const TextStyle(
+            // Pedagogical green — matches the correct-answer accent.
             color: Color(0xFF4CAF50),
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -315,13 +317,11 @@ class _ExplanationCard extends StatelessWidget {
   final Question question;
   final bool wasCorrect;
 
-  const _ExplanationCard({
-    required this.question,
-    required this.wasCorrect,
-  });
+  const _ExplanationCard({required this.question, required this.wasCorrect});
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Container(
       // 16px visual margin + whatever the system nav bar needs, so the
       // card never slides under the gesture bar (Android 15 edge-to-edge).
@@ -333,9 +333,9 @@ class _ExplanationCard extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFF23232B),
+        color: colors.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFF34343E)),
+        border: Border.all(color: colors.outlineVariant),
         boxShadow: const [
           BoxShadow(
             color: Colors.black54,
@@ -351,9 +351,7 @@ class _ExplanationCard extends StatelessWidget {
           Row(
             children: [
               Icon(
-                wasCorrect
-                    ? Icons.check_circle_rounded
-                    : Icons.cancel_rounded,
+                wasCorrect ? Icons.check_circle_rounded : Icons.cancel_rounded,
                 color: wasCorrect
                     ? const Color(0xFF4CAF50)
                     : const Color(0xFFEF5350),
@@ -373,7 +371,7 @@ class _ExplanationCard extends StatelessWidget {
               const Spacer(),
               Text(
                 'Answer: ${['A', 'B', 'C', 'D'][question.correctIndex]}',
-                style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
+                style: TextStyle(color: colors.onSurfaceVariant, fontSize: 13),
               ),
             ],
           ),
@@ -381,7 +379,7 @@ class _ExplanationCard extends StatelessWidget {
           Text(
             question.explanation,
             style: TextStyle(
-              color: Colors.grey.shade300,
+              color: colors.onSurface,
               fontSize: 14,
               height: 1.4,
             ),
@@ -393,12 +391,12 @@ class _ExplanationCard extends StatelessWidget {
               Icon(
                 Icons.swipe_up_rounded,
                 size: 16,
-                color: Colors.grey.shade600,
+                color: colors.onSurfaceVariant,
               ),
               const SizedBox(width: 6),
               Text(
                 'Swipe up for next',
-                style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
+                style: TextStyle(color: colors.onSurfaceVariant, fontSize: 12),
               ),
             ],
           ),

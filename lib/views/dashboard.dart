@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../controllers/quiz_controller.dart';
 import '../models/questions.dart';
 import '../theme/mindscroll_theme.dart';
@@ -136,13 +137,13 @@ class _DashboardState extends State<Dashboard> {
                       itemCount: _folders.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 12,
-                        crossAxisSpacing: 12,
-                        // childAspectRatio = crossAxis/mainAxis = height/width
-                        // for a horizontal grid. 120/0.67 ≈ 180px wide cards.
-                        childAspectRatio: 0.67,
-                      ),
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 12,
+                            crossAxisSpacing: 12,
+                            // childAspectRatio = crossAxis/mainAxis = height/width
+                            // for a horizontal grid. 120/0.67 ≈ 180px wide cards.
+                            childAspectRatio: 0.67,
+                          ),
                       itemBuilder: (context, index) {
                         final folder = _folders[index];
                         return _FolderCard(
@@ -171,9 +172,11 @@ class _DashboardState extends State<Dashboard> {
                   // grid would reintroduce the overflow problem.
                   Column(
                     children: [
-                      for (var index = 0;
-                          index < _studySets.length;
-                          index++) ...[
+                      for (
+                        var index = 0;
+                        index < _studySets.length;
+                        index++
+                      ) ...[
                         StudySetCard(
                           studySet: _studySets[index],
                           onStart: () => _startQuiz(_studySets[index]),
@@ -228,8 +231,10 @@ class _DashboardState extends State<Dashboard> {
                 borderRadius: BorderRadius.circular(16),
                 onTap: () => _showMessage('Keep it going — day 6 is next!'),
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 8,
+                  ),
                   child: Text(
                     '🔥 5 Day Streak',
                     style: inter(
@@ -298,10 +303,7 @@ class _SectionHeader extends StatelessWidget {
           ),
           child: Text(
             action,
-            style: inter(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
+            style: inter(fontSize: 14, fontWeight: FontWeight.w500),
           ),
         ),
       ],
@@ -396,7 +398,9 @@ class _BottomNavigation extends StatelessWidget {
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surfaceContainerLow,
           border: Border(
-            top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
+            top: BorderSide(
+              color: Theme.of(context).colorScheme.outlineVariant,
+            ),
           ),
         ),
         child: Row(

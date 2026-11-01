@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/questions.dart';
 import '../theme/mindscroll_theme.dart';
 import 'create_sheet.dart';
@@ -92,10 +93,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen> {
         ),
         title: Text(
           'Folder',
-          style: inter(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-          ),
+          style: inter(fontSize: 18, fontWeight: FontWeight.w700),
         ),
         actions: [
           IconButton(
@@ -184,10 +182,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen> {
                   ),
                   child: Text(
                     '+ Create Study Set',
-                    style: inter(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: inter(fontSize: 14, fontWeight: FontWeight.w500),
                   ),
                 ),
               ],
@@ -203,8 +198,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen> {
                       studySet: sets[index],
                       onStart: () => _startQuiz(sets[index]),
                     ),
-                    if (index != sets.length - 1)
-                      const SizedBox(height: 12),
+                    if (index != sets.length - 1) const SizedBox(height: 12),
                   ],
                 ],
               ),
@@ -232,13 +226,7 @@ class _FolderMetric extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            value,
-            style: inter(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
+          Text(value, style: inter(fontSize: 18, fontWeight: FontWeight.w700)),
           const SizedBox(height: 3),
           Text(
             label,
@@ -277,10 +265,7 @@ class _EmptyFolderState extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             'No study sets yet',
-            style: inter(
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
-            ),
+            style: inter(fontSize: 15, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 6),
           Text(

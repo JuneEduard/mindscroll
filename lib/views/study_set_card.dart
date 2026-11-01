@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/questions.dart';
 import '../theme/mindscroll_theme.dart';
 
@@ -96,15 +97,10 @@ class StudySetCard extends StatelessWidget {
             // primary/onPrimary from the ColorScheme (onPrimary text).
             child: FilledButton(
               onPressed: onStart,
-              style: FilledButton.styleFrom(
-                padding: EdgeInsets.zero,
-              ),
+              style: FilledButton.styleFrom(padding: EdgeInsets.zero),
               child: Text(
                 '▶ Start',
-                style: inter(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: inter(fontSize: 12, fontWeight: FontWeight.w600),
               ),
             ),
           ),

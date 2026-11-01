@@ -71,8 +71,10 @@ mechanisms), stays free, and adds AI-assisted question generation.
 ## Tech Stack & Architecture
 
 - **Flutter SDK + Dart**, targeting Android (expandable to iOS/desktop/web).
-- **Material Design 3** dark theme (`#121212` background, `#1E1E24` surface,
-  Inter typeface, bundled locally under `fonts/` — SIL OFL).
+- **Material Design 3** dark theme — the centralized "Midnight Violet"
+  `ColorScheme` in `lib/theme/mindscroll_theme.dart` (Inter typeface, bundled
+  locally under `fonts/` — SIL OFL). Views read `Theme.of(context).colorScheme`
+  roles; no hardcoded hex in the UI.
 - **MVVM pattern** with a strict layered architecture:
   - *Presentation* (`lib/views/`) — declarative widgets; dashboard, reel feed,
     folder detail, shared `CreateSheet` / `StudySetCard`.
@@ -90,7 +92,8 @@ mechanisms), stays free, and adds AI-assisted question generation.
 
 ```
 lib/
-├── main.dart                  # App entry, theme, AppColors design tokens
+├── main.dart                  # App entry, wires in the theme
+├── theme/mindscroll_theme.dart # Midnight Violet M3 ColorScheme + theme
 ├── models/questions.dart      # Question, StudySet, StudyFolder, StudySetSource
 ├── controllers/
 │   └── quiz_controller.dart   # ChangeNotifier ViewModel + mock content
@@ -104,6 +107,7 @@ tool/
 └── figma_sync.dart            # Figma REST API → design tokens sync
 fonts/                         # Bundled Inter (OFL)
 docs/progress-log.md           # Sprint 1 engineering log
+docs/AI-HANDOFF.md             # Shared state for switching AI assistants
 ```
 
 ## Getting Started

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../models/questions.dart';
 
 /// Native ChangeNotifier ViewModel — no third-party state packages.
@@ -64,11 +65,16 @@ class QuizController extends ChangeNotifier {
         Question(
           id: 'dart-1',
           category: 'Flutter',
-          prompt: 'Which widget cannot change its configuration once it is built?',
-          options: ['StatefulWidget', 'StatelessWidget', 'InheritedWidget', 'StreamBuilder'],
+          prompt:
+              'Which widget cannot change its configuration once it is built?',
+          options: [
+            'StatefulWidget',
+            'StatelessWidget',
+            'InheritedWidget',
+            'StreamBuilder',
+          ],
           correctIndex: 1,
-          explanation:
-              'A StatelessWidget is immutable — when its inputs change, Flutter rebuilds a brand new widget instead.',
+          explanation: 'A StatelessWidget is immutable — when its inputs change, Flutter rebuilds a brand new widget instead.',
         ),
         Question(
           id: 'dart-2',
@@ -76,13 +82,13 @@ class QuizController extends ChangeNotifier {
           prompt: 'Which programming language is Flutter primarily written in?',
           options: ['Kotlin', 'Swift', 'Dart', 'TypeScript'],
           correctIndex: 2,
-          explanation:
-              "Flutter's framework and the Dart VM are written in Dart, which compiles to native code.",
+          explanation: "Flutter's framework and the Dart VM are written in Dart, which compiles to native code.",
         ),
         Question(
           id: 'dart-3',
           category: 'Tooling',
-          prompt: 'What does the pubspec.yaml file define in a Flutter project?',
+          prompt:
+              'What does the pubspec.yaml file define in a Flutter project?',
           options: [
             'App signing keys',
             'Dependencies and assets',
@@ -90,8 +96,7 @@ class QuizController extends ChangeNotifier {
             'Widget tree layout',
           ],
           correctIndex: 1,
-          explanation:
-              'pubspec.yaml declares package dependencies, fonts, images and other assets for the app.',
+          explanation: 'pubspec.yaml declares package dependencies, fonts, images and other assets for the app.',
         ),
       ],
     ),
@@ -108,17 +113,16 @@ class QuizController extends ChangeNotifier {
           prompt: 'What is the time complexity of binary search on a sorted array of n elements?',
           options: ['O(n)', 'O(log n)', 'O(n log n)', 'O(1)'],
           correctIndex: 1,
-          explanation:
-              'Binary search halves the search space on every step, so it takes at most log₂(n) comparisons — that is O(log n).',
+          explanation: 'Binary search halves the search space on every step, so it takes at most log₂(n) comparisons — that is O(log n).',
         ),
         Question(
           id: 'cs-2',
           category: 'Data Structures',
-          prompt: 'Which data structure follows Last-In-First-Out (LIFO) ordering?',
+          prompt:
+              'Which data structure follows Last-In-First-Out (LIFO) ordering?',
           options: ['Queue', 'Linked List', 'Stack', 'Heap'],
           correctIndex: 2,
-          explanation:
-              'A stack pushes and pops from the same end, so the last element added is the first one removed — LIFO.',
+          explanation: 'A stack pushes and pops from the same end, so the last element added is the first one removed — LIFO.',
         ),
         Question(
           id: 'cs-3',
@@ -126,17 +130,20 @@ class QuizController extends ChangeNotifier {
           prompt: 'Which protocol securely transfers web pages over an encrypted connection?',
           options: ['HTTP', 'FTP', 'SMTP', 'HTTPS'],
           correctIndex: 3,
-          explanation:
-              'HTTPS wraps HTTP inside TLS/SSL encryption, protecting data in transit between browser and server.',
+          explanation: 'HTTPS wraps HTTP inside TLS/SSL encryption, protecting data in transit between browser and server.',
         ),
         Question(
           id: 'cs-4',
           category: 'Concurrency',
           prompt: 'What does a mutex primarily protect against?',
-          options: ['Memory leaks', 'Race conditions', 'Deadlocks', 'Stack overflows'],
+          options: [
+            'Memory leaks',
+            'Race conditions',
+            'Deadlocks',
+            'Stack overflows',
+          ],
           correctIndex: 1,
-          explanation:
-              'A mutex serializes access to shared resources so only one thread enters a critical section at a time.',
+          explanation: 'A mutex serializes access to shared resources so only one thread enters a critical section at a time.',
         ),
       ],
     ),
@@ -150,11 +157,11 @@ class QuizController extends ChangeNotifier {
         Question(
           id: 'db-1',
           category: 'Flutter',
-          prompt: 'Which Flutter package provides local SQLite database storage?',
+          prompt:
+              'Which Flutter package provides local SQLite database storage?',
           options: ['sqflite', 'dio', 'provider', 'firebase_core'],
           correctIndex: 0,
-          explanation:
-              'sqflite is the standard SQLite plugin for Flutter, giving you tables, queries and transactions on-device.',
+          explanation: 'sqflite is the standard SQLite plugin for Flutter, giving you tables, queries and transactions on-device.',
         ),
         Question(
           id: 'db-2',
@@ -162,8 +169,7 @@ class QuizController extends ChangeNotifier {
           prompt: 'In SQLite, which statement permanently saves the current transaction?',
           options: ['SAVE', 'COMMIT', 'FLUSH', 'PERSIST'],
           correctIndex: 1,
-          explanation:
-              'COMMIT makes all changes in the current transaction permanent; ROLLBACK undoes them.',
+          explanation: 'COMMIT makes all changes in the current transaction permanent; ROLLBACK undoes them.',
         ),
         Question(
           id: 'db-3',
@@ -171,8 +177,7 @@ class QuizController extends ChangeNotifier {
           prompt: 'Which package is the standard choice for simple key-value local storage?',
           options: ['hive', 'path_provider', 'shared_preferences', 'drift'],
           correctIndex: 2,
-          explanation:
-              'shared_preferences stores small key-value pairs (tokens, flags) backed by platform storage.',
+          explanation: 'shared_preferences stores small key-value pairs (tokens, flags) backed by platform storage.',
         ),
         Question(
           id: 'db-4',
@@ -185,8 +190,7 @@ class QuizController extends ChangeNotifier {
             'Encrypts the whole database',
           ],
           correctIndex: 1,
-          explanation:
-              'Migrations evolve the schema (new tables/columns) safely while preserving existing user data.',
+          explanation: 'Migrations evolve the schema (new tables/columns) safely while preserving existing user data.',
         ),
       ],
     ),
@@ -208,8 +212,7 @@ class QuizController extends ChangeNotifier {
             'Advanced Digital Circuit',
           ],
           correctIndex: 0,
-          explanation:
-              'An ADC samples a continuous analog signal and quantizes it into digital values.',
+          explanation: 'An ADC samples a continuous analog signal and quantizes it into digital values.',
         ),
         Question(
           id: 'elec-2',
@@ -217,8 +220,7 @@ class QuizController extends ChangeNotifier {
           prompt: 'The Nyquist theorem says the sampling rate must be at least ___ the highest signal frequency.',
           options: ['Equal to', 'Twice', 'Four times', 'Half of'],
           correctIndex: 1,
-          explanation:
-              'Sampling below 2× the highest frequency causes aliasing, where high frequencies masquerade as low ones.',
+          explanation: 'Sampling below 2× the highest frequency causes aliasing, where high frequencies masquerade as low ones.',
         ),
       ],
     ),
@@ -233,10 +235,14 @@ class QuizController extends ChangeNotifier {
           id: 'elec-3',
           category: 'Circuits',
           prompt: 'V = IR is the statement of which law?',
-          options: ["Kirchhoff's Law", "Faraday's Law", "Ohm's Law", "Lenz's Law"],
+          options: [
+            "Kirchhoff's Law",
+            "Faraday's Law",
+            "Ohm's Law",
+            "Lenz's Law",
+          ],
           correctIndex: 2,
-          explanation:
-              "Ohm's Law relates voltage, current and resistance in a resistor: V = I × R.",
+          explanation: "Ohm's Law relates voltage, current and resistance in a resistor: V = I × R.",
         ),
         Question(
           id: 'elec-4',

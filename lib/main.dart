@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'theme/mindscroll_theme.dart';
 import 'views/dashboard.dart';
 

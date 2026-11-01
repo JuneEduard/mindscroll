@@ -9,15 +9,14 @@ TextStyle inter({
   FontWeight? fontWeight,
   Color? color,
   TextDecoration? decoration,
-}) =>
-    TextStyle(
-      fontFamily: 'Inter',
-      fontSize: fontSize,
-      height: height,
-      fontWeight: fontWeight,
-      color: color,
-      decoration: decoration,
-    );
+}) => TextStyle(
+  fontFamily: 'Inter',
+  fontSize: fontSize,
+  height: height,
+  fontWeight: fontWeight,
+  color: color,
+  decoration: decoration,
+);
 
 /// "Midnight Violet" — dark Material 3 ColorScheme. UI reads colors through
 /// `Theme.of(context).colorScheme` roles; nothing in the views hardcodes hex.
@@ -69,19 +68,21 @@ class MindScrollColors extends ThemeExtension<MindScrollColors> {
   MindScrollColors copyWith({
     Color? streakContainer,
     Color? onStreakContainer,
-  }) =>
-      MindScrollColors(
-        streakContainer: streakContainer ?? this.streakContainer,
-        onStreakContainer: onStreakContainer ?? this.onStreakContainer,
-      );
+  }) => MindScrollColors(
+    streakContainer: streakContainer ?? this.streakContainer,
+    onStreakContainer: onStreakContainer ?? this.onStreakContainer,
+  );
 
   @override
   MindScrollColors lerp(ThemeExtension<MindScrollColors>? other, double t) {
     if (other is! MindScrollColors) return this;
     return MindScrollColors(
       streakContainer: Color.lerp(streakContainer, other.streakContainer, t)!,
-      onStreakContainer:
-          Color.lerp(onStreakContainer, other.onStreakContainer, t)!,
+      onStreakContainer: Color.lerp(
+        onStreakContainer,
+        other.onStreakContainer,
+        t,
+      )!,
     );
   }
 }
@@ -116,10 +117,7 @@ final ThemeData mindScrollDarkTheme = () {
         )
         // Secondary/hint text uses onSurfaceVariant everywhere.
         .copyWith(
-          bodySmall: inter(
-            fontSize: 12,
-            color: colorScheme.onSurfaceVariant,
-          ),
+          bodySmall: inter(fontSize: 12, color: colorScheme.onSurfaceVariant),
         ),
     appBarTheme: AppBarTheme(
       backgroundColor: colorScheme.surfaceContainerLowest,
@@ -153,10 +151,7 @@ final ThemeData mindScrollDarkTheme = () {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: colorScheme.surfaceContainerLowest,
-      hintStyle: inter(
-        fontSize: 14,
-        color: colorScheme.onSurfaceVariant,
-      ),
+      hintStyle: inter(fontSize: 14, color: colorScheme.onSurfaceVariant),
       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),

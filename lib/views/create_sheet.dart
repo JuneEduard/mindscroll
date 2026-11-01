@@ -1,5 +1,7 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+
 import '../theme/mindscroll_theme.dart';
 
 /// Modal bottom sheet for creating a folder or study set.
@@ -12,8 +14,7 @@ class CreateSheet extends StatefulWidget {
 
   final bool isFolder;
 
-  static Future<String?> show(BuildContext context,
-      {required bool isFolder}) {
+  static Future<String?> show(BuildContext context, {required bool isFolder}) {
     return showModalBottomSheet<String>(
       context: context,
       isScrollControlled: true,
@@ -22,7 +23,8 @@ class CreateSheet extends StatefulWidget {
         // Android 15 draws behind the system nav bar (edge-to-edge). Lift the
         // sheet above whichever is taller: the keyboard or the nav bar —
         // summing would double-count the shared region.
-        final bottom = math.max(
+        final bottom =
+            math.max(
               MediaQuery.viewInsetsOf(context).bottom, // keyboard
               MediaQuery.paddingOf(context).bottom, // system nav bar
             ) +
@@ -65,10 +67,7 @@ class _CreateSheetState extends State<CreateSheet> {
                 Expanded(
                   child: Text(
                     widget.isFolder ? 'New Folder' : 'Create Study Set',
-                    style: inter(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: inter(fontSize: 18, fontWeight: FontWeight.w700),
                   ),
                 ),
                 IconButton(

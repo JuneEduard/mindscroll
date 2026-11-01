@@ -3,6 +3,9 @@
 > Companion log for the project report. Covers all work completed in Sprint 1,
 > mapped to the proposal tasks. All development was verified with
 > `flutter analyze` (0 issues) and widget tests (all passing) at each step.
+>
+> **Switching AI assistants?** Read [`AI-HANDOFF.md`](AI-HANDOFF.md) first —
+> it holds the current state, open items, and the cross-tool handoff log.
 
 ## Proposal Task Mapping
 
@@ -32,8 +35,9 @@
   `🔥 5 Day Streak` pill `#352319`/`#FF6D00`, settings gear), **My Study
   Folders** section, **Recent Study Sets** section, fixed 64px bottom action
   bar (Home / Notes / Import PDF) with custom Figma SVG icons.
-- Purple Material 3 dark theme (`#121212` background, `#1E1E24` surface,
-  `#6200EE` primary, `#BB86FC` accent) via `AppColors` tokens + Inter `TextTheme`.
+- Purple Material 3 dark theme via the centralized `lib/theme/mindscroll_theme.dart`
+  ("Midnight Violet" `ColorScheme` + Inter `TextTheme`); views read
+  `Theme.of(context).colorScheme` roles — no hardcoded hex in views.
 - Tapping **▶ Start** on any study set pushes `ReelQuizFeed` (empty sets show
   a guard snackbar instead of an empty screen).
 
@@ -100,10 +104,11 @@
 ## Verification (final state)
 
 - `flutter analyze` — **No issues found!**
-- `flutter test` — **4/4 widget tests passing**:
+- `flutter test` — **5/5 widget tests passing**:
   dashboard renders per Figma design; cancelling create sheets does not throw
   (regression); tapping a folder opens its detail screen; creating a folder
-  adds it to the grid.
+  adds it to the grid; reel feed lays out without exceptions and answers
+  correctly (regression for the `ParentDataWidget` bug).
 - Live runtime verified via VM-service integration (widget inspector + memory).
 
 ## Tooling
@@ -146,6 +151,29 @@
   screenshots while reproducing, isolated a `ParentDataWidget` violation as
   the cause of the reel grey screen + swipe jank, and verified the fix
   on-device (raster 12.3 → 8.7 ms/frame, UI ~1 ms/frame).
+
+**Claude Code (AI coding assistant)**
+- Picked up Kimi's in-progress centralized-theme refactor and fixed the
+  build failure blocking the debug launch: the current Flutter SDK's
+  `ThemeData.cardTheme` / `dialogTheme` accept `CardThemeData` /
+  `DialogThemeData`, so the old `CardTheme` / `DialogTheme` constructors no
+  longer type-check. Migrated both in
+  `lib/theme/mindscroll_theme.dart`; `flutter analyze` (0 issues) and the
+  widget suite (5/5 passing, including the reel regression test) pass again.
+- Committed the theme progress as `b0dd9a1` (centralized Midnight Violet M3
+  theme, theme-role colors in views, edge-to-edge insets) using the project's
+  existing commit-message style.
+
+**Kimi Code CLI (AI coding assistant)**
+- Completed the `reel_quiz_feed.dart` theme-role conversion (option tiles,
+  progress header, category chip, explanation card →
+  `Theme.of(context).colorScheme`), removing the last hardcoded hex from the
+  views. Kept the pedagogical answer-feedback green/red as documented named
+  constants.
+- Reconciled `README.md` and this log with the Midnight Violet theme
+  (dropped stale `AppColors` palette references, corrected the test count to
+  5/5); refreshed `docs/AI-HANDOFF.md` for the next assistant.
+- Verified `flutter analyze` (0 issues) and `flutter test` (5/5 passing).
 
 ### Verification status of AI-generated code
 
